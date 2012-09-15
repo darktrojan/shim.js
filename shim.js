@@ -83,12 +83,19 @@ if (!('localName' in Element.prototype)) {
 }
 
 if (!('addEventListener' in window)) {
-  EventListener = function(aEventName, aHandler, aUseCapture) {
+  function AddEventListener(aEventName, aHandler, aUseCapture) {
     this.attachEvent('on' + aEventName, aHandler);
   };
-  window.addEventListener = EventListener;
-  document.addEventListener = EventListener;
-  Element.prototype.addEventListener = EventListener;
+  function RemoveEventListener(aEventName, aHandler, aUseCapture) {
+    this.detachEvent('on' + aEventName, aHandler);
+  };
+
+  window.addEventListener = AddEventListener;
+  window.removeEventListener = RemoveEventListener;
+  document.addEventListener = AddEventListener;
+  document.removeEventListener = RemoveEventListener;
+  Element.prototype.addEventListener = AddEventListener;
+  Element.prototype.removeEventListener = RemoveEventListener;
 }
 
 if (!('getElementsByClassName' in document)) {
