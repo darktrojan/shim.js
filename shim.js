@@ -103,3 +103,9 @@ if (!('getElementsByClassName' in document)) {
     return this.querySelectorAll('.' + aClassName);
   };
 }
+
+(function() {
+  var names = ['article', 'aside', 'footer', 'header', 'hgroup', 'nav', 'section'];
+  for (var i = 0; i < names.length; i++)
+    document.createElement(names[i]);
+})();
