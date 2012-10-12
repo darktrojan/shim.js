@@ -6,6 +6,9 @@ This is a small javascript file to bring Internet Explorer 8 & 9 up to speed wit
     <!--[if IE 8]><script src="shim.js" type="text/javascript"></script><![endif]-->
     <!--[if IE 9]><script src="shim.js" type="text/javascript"></script><![endif]-->
 
+Does it work in IE 6 or 7? No. Bits of it would, but neither are capable of adding stuff to `Element`.
+Is it fast? Oh come on, it's for IE.
+
 Functions added:
 ----------------
 
