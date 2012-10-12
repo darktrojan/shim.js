@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--[if IE 8]><script src="shim.js" type="text/javascript"></script><![endif]-->
+<!--[if IE 9]><script src="shim.js" type="text/javascript"></script><![endif]-->
+</head>
+<body>
+
+<pre id="output"></pre>
+
+<script>
+
+var output = document.getElementById('output');
+
+var passCount = 0, failCount = 0;
+
+function is(arg1, arg2) {
+	if (arg1 === arg2) {
+		output.innerHTML += arg1 + ' === ' + arg2 + '<br/>';
+		passCount++;
+	} else {
+		output.innerHTML += arg1 + ' !== ' + arg2 + '<br/>';
+		failCount++;
+	}
+}
+
+var a = ['moo','baa','oink'];
+is([].indexOf('moo'), -1);
+is(a.indexOf('moo'), 0);
+is(a.indexOf('baa'), 1);
+is(a.indexOf('oink'), 2);
+is(a.indexOf('moooo'), -1);
+
+output.innerHTML += '<hr/>Passed: ' + passCount + ' Failed: ' + failCount;
+
+</script>
+</body>
+</html>
