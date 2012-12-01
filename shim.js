@@ -82,6 +82,71 @@ if (!('localName' in Element.prototype)) {
   });
 }
 
+if (!('firstElementChild' in Element.prototype)) {
+  Object.defineProperty(Element.prototype, 'children', {
+    'get': function() {
+      var children = {
+        item: function(i) {
+          return this[i];
+        }
+      };
+      var i = 0;
+      for (var next = this.firstChild; next; next = next.nextSibling) {
+        if (next.nodeType == 1)
+          children[i++] = next;
+      }
+      children.length = i;
+      return children;
+    },
+    'enumerable': false,
+    'configurable': true
+  });
+  Object.defineProperty(Element.prototype, 'firstElementChild', {
+    'get': function() {
+      for (var next = this.firstChild; next; next = next.nextSibling) {
+        if (next.nodeType == 1)
+          return next;
+      }
+      return null;
+    },
+    'enumerable': false,
+    'configurable': true
+  });
+  Object.defineProperty(Element.prototype, 'nextElementSibling', {
+    'get': function() {
+      for (var next = this.nextSibling; next; next = next.nextSibling) {
+        if (next.nodeType == 1)
+          return next;
+      }
+      return null;
+    },
+    'enumerable': false,
+    'configurable': true
+  });
+  Object.defineProperty(Element.prototype, 'lastElementChild', {
+    'get': function() {
+      for (var prev = this.lastChild; prev; prev = prev.previousSibling) {
+        if (prev.nodeType == 1)
+          return prev;
+      }
+      return null;
+    },
+    'enumerable': false,
+    'configurable': true
+  });
+  Object.defineProperty(Element.prototype, 'previousElementSibling', {
+    'get': function() {
+      for (var prev = this.previousSibling; prev; prev = prev.previousSibling) {
+        if (prev.nodeType == 1)
+          return prev;
+      }
+      return null;
+    },
+    'enumerable': false,
+    'configurable': true
+  });
+}
+
 if (!('addEventListener' in window)) {
   function AddEventListener(aEventName, aHandler, aUseCapture) {
     this.attachEvent('on' + aEventName, aHandler);
