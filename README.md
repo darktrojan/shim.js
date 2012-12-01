@@ -18,6 +18,7 @@ Functions added:
 * `Element.classList` (only `add`, `remove` and `contains` functions) - this is the only part shim.js is required for in IE9
 * `Element.textContent`
 * `Element.localName`
+* Element traversal: `children`, `firstElementChild`, `nextElementSibling`, `lastElementChild`, and `previousElementSibling`. (Note that `Element.children` should not be stored in a variable, it won't update to match tree changes.)
 * `addEventListener` and `removeEventListener` on `window`, `document`, and `Element`
 * `document.getElementsByClassName`
 
