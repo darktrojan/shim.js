@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--[if IE 8]><script src="shim.js" type="text/javascript"></script><![endif]-->
+<!--[if IE 9]><script src="shim.js" type="text/javascript"></script><![endif]-->
+</head>
+<body>
+
+<div id="content" style="display: none">
+<span>span</span><div>div</div>
+<!--comment goes here-->
+<p id="p1">p1</p>
+text here
+<p id="p2">p2</p>
+<span>a<span>b</span>c<span>d</span>e</span>
+</div>
+
+<pre id="output"></pre>
+
+<script>
+
+var output = document.getElementById('output');
+
+var passCount = 0, failCount = 0;
+
+function is(arg1, arg2) {
+	if (arg1 === arg2) {
+		output.innerHTML += arg1 + ' === ' + arg2 + '<br/>';
+		passCount++;
+	} else {
+		output.innerHTML += arg1 + ' !== ' + arg2 + '<br/>';
+		failCount++;
+	}
+}
+
+var c = document.getElementById('content');
+// Not an HTMLCollection when using shim.
+// var cc = c.children;
+
+var contents = ['span', 'div', 'p1', 'p2', 'abcde'];
+function testContent() {
+	for(i = 0, e = c.firstElementChild; e; e = e.nextElementSibling, i++) {
+		is(e.textContent, contents[i]);
+		is(e, c.children[i]);
+		is(e, c.children.item(i));
+	}
+	is(i, contents.length);
+	is(i, c.children.length);
+
+	// Nuke all elements to retest the child list.
+	c.innerHTML = c.innerHTML;
+
+	for(i--, e = c.lastElementChild; e; e = e.previousElementSibling, i--) {
+		is(e.textContent, contents[i]);
+		is(e, c.children[i]);
+		is(e, c.children.item(i));
+	}
+	is(i, -1);
+}
+
+testContent();
+
+is(c.children.length, 5);
+
+var p1 = document.getElementById('p1');
+var p2 = document.getElementById('p2');
+is(p1.nextElementSibling, p2);
+is(p2.previousElementSibling, p1);
+
+u = document.createElement('u');
+u.textContent = 'u';
+c.insertBefore(u, p2);
+is(c.children.length, 6);
+is(p1.nextElementSibling, u);
+is(p2.previousElementSibling, u);
+
+contents.splice(3, 0, 'u');
+testContent();
+
+var p1 = document.getElementById('p1');
+var p2 = document.getElementById('p2');
+c.removeChild(p1);
+c.removeChild(p2);
+is(c.children.length, 4);
+
+contents.splice(2, 1);
+contents.splice(3, 1);
+testContent();
+
+output.innerHTML += '<hr/>Passed: ' + passCount + ' Failed: ' + failCount;
+
+</script>
+</body>
+</html>
