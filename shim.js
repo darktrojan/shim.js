@@ -163,6 +163,10 @@ if (!('addEventListener' in window)) {
   Element.prototype.removeEventListener = RemoveEventListener;
 }
 
+if (!('head' in document)) {
+  document.head = document.querySelector('head');
+}
+
 if (!('getElementsByClassName' in document)) {
   document.getElementsByClassName = function(aClassName) {
     return this.querySelectorAll('.' + aClassName);
