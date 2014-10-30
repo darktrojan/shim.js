@@ -19,6 +19,16 @@ if (typeof String.prototype.trim != 'function') {
 	};
 }
 
+if (typeof Object.create != 'function') {
+	Object.create = function (prototype) {
+		var obj = function() {};
+		obj.prototype = prototype;
+		var result = new obj();
+		obj.prototype = null;
+		return result;
+	};
+}
+
 if (!('classList' in Element.prototype)) {
 	ClassList = function(aElement) {
 		this.element = aElement;
