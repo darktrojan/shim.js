@@ -62,6 +62,10 @@ is(document.body.className, 'baa');
 testContains('test', false);
 testContains('moo', false);
 testContains('baa', true);
+is(document.body.classList.toggle('baa'), false);
+testContains('baa', false);
+is(document.body.classList.toggle('baa'), true);
+testContains('baa', true);
 
 output.innerHTML += '<hr/>Passed: ' + passCount + ' Failed: ' + failCount;
 

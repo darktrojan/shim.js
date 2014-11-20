@@ -49,6 +49,14 @@ if (!('classList' in Element.prototype)) {
 			var list = this._getList();
 			return list.indexOf(aClassName) >= 0;
 		},
+		toggle: function(aClassName) {
+			if (this.contains(aClassName)) {
+				this.remove(aClassName);
+				return false;
+			}
+			this.add(aClassName);
+			return true;
+		},
 		_getList: function() {
 			var list = this.element.className.split(/\s+/);
 			if (list.length && list[0] == '')
